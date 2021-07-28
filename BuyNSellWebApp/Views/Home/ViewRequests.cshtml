@@ -1,0 +1,74 @@
+﻿@model BuyNSellWebApp.Models.Product
+
+@{
+    ViewData["Title"] = "ViewRequests";
+}
+
+<div class="text-center">
+    <h1 class="display-4 font-weight-bold">@Model.ProductName (@Model.SubType.SubTypeName)</h1>
+    <p>Selling Price: $ @Model.Price</p>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img class="card-img-top" src="~/photos/@Model.ProductID@Model.ExtName" alt="Card image">
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Address</th>
+                    <th>Contact No</th>
+                    <th>Request Date</th>
+                    <th>Status</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Requests.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="6" align="center">There is no Buy Request for This Product</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model.Requests)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequestDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @if (item.Status.Equals("Pending"))
+                                {
+                                    <a class="btn btn-success mr-2 mb-2" asp-action="ApproveRequest" asp-route-id="@item.RequestID">Approve</a>
+                                    <a class="btn btn-success" asp-action="DeclineRequest" asp-route-id="@item.RequestID">Decline</a>
+                                }
+                                else
+                                {
+                                    <strong>No Operations Available</strong>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

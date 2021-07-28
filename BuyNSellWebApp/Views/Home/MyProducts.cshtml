@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BuyNSellWebApp.Models.Product>
+
+@{
+    ViewData["Title"] = "MyProducts";
+}
+
+<div class="text-center">
+    <h1 class="display-4  font-weight-bold">My List of Products</h1>
+</div>
+<hr />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6  mb-3">
+            <div class="card shadow col-md-12">
+                <img class="card-img-top text-center" style="height: 200px; width: 400px; margin: 0 auto;" src="~/photos/@item.ProductID@item.ExtName"
+                     alt="Employee Image">
+                <div class="card-body">
+                    <h5 class="card-title">@item.ProductName (@item.SubType.SubTypeName)</h5>
+                    <p class="card-text">Sell Price: $ @item.Price</p>
+                    <p class="card-text">@item.Description</p>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <a asp-action="ViewRequests" class="btn btn-info btn-block" asp-route-id="@item.ProductID">View Requests</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a asp-action="DeleteProduct" class="btn btn-danger btn-block" asp-route-id="@item.ProductID">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

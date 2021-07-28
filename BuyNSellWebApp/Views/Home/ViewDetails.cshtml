@@ -1,0 +1,23 @@
+﻿@model BuyNSellWebApp.Models.Product
+
+@{
+    ViewData["Title"] = "ViewDetails";
+}
+
+<div class="text-center">
+    <h1 class="display-4 font-weight-bold">@Model.ProductName (@Model.SubType.SubTypeName)</h1> 
+    
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img class="card-img-top" src="~/photos/@Model.ProductID@Model.ExtName" alt="Card image">
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h3>Selling Price : $ @Model.Price</h3>
+        <p class="font-weight-bolder">Description</p>
+        <p>@Model.Description</p>
+        <a class="btn btn-success text-center" asp-action="SendRequest" asp-route-id="@Model.ProductID">Send Request</a>
+    </div>
+</div>

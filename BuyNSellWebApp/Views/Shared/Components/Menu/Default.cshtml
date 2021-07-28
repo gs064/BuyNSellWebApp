@@ -1,0 +1,19 @@
+﻿@model List<BuyNSellWebApp.Models.Type>
+    <li class="nav-item dropdown">
+        <a class="nav-link font-weight-bold text-dark dropdown-toggle" href="#" data-toggle="dropdown">All Category</a>
+        <ul class="dropdown-menu">
+            @foreach (var type in Model)
+            {
+                <li>
+                    <a class="dropdown-item font-weight-bold text-dark" href="#">@type.TypeName &raquo </a>
+                    <ul class="submenu dropdown-menu">
+                        @foreach (var subtype in type.SubTypes)
+                        {
+                            <li><a class="dropdown-item  font-weight-bold text-dark" asp-action="ProductBySubType" asp-route-id="@subtype.SubTypeID">@subtype.SubTypeName</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+
+        </ul>
+    </li>
